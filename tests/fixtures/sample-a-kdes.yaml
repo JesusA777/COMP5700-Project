@@ -1,0 +1,8 @@
+element1:
+  name: container user
+  requirements:
+    - Ensure that a user for the container has been created
+element2:
+  name: add instruction
+  requirements:
+    - Ensure that COPY is used instead of ADD in Dockerfiles

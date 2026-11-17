@@ -1,0 +1,3 @@
+container user,Ensure the container does not run as root
+add instruction,Ensure that COPY is used instead of ADD in Dockerfiles
+healthcheck,Ensure that HEALTHCHECK instructions have been added to container images

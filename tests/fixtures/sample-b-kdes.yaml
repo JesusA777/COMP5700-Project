@@ -1,0 +1,9 @@
+element1:
+  name: container user
+  requirements:
+    - Ensure that a user for the container has been created
+    - Ensure the container does not run as root
+element2:
+  name: healthcheck
+  requirements:
+    - Ensure that HEALTHCHECK instructions have been added to container images
