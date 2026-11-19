@@ -1,0 +1,1776 @@
+*LLM Name*
+google/gemma-3-1b-it
+*Prompt Used*
+You are a security analyst. Read the security requirements document below and identify its key data elements.
+A key data element is a configuration item, component or setting that the requirements talk about (for example: container user, image, port, log file).
+One key data element can map to several requirements.
+
+Answer only with YAML in exactly this format and nothing else:
+element1:
+  name: <short name of the key data element>
+  requirements:
+    - <requirement text>
+    - <requirement text>
+element2:
+  name: <short name of the key data element>
+  requirements:
+    - <requirement text>
+
+Document:
+1.1.1 Ensure a separate partition for containers has been created
+1.1.2 Ensure only trusted users are allowed to control Docker daemon
+1.1.3 Ensure auditing is configured for the Docker daemon
+1.1.4 Ensure auditing is configured for Docker files and directories - /run/containerd
+1.1.5 Ensure auditing is configured for Docker files and directories - /var/lib/docker 27
+1.1.6 Ensure auditing is configured for Docker files and directories - /etc/docker
+1.1.7 Ensure auditing is configured for Docker files and directories - docker.service
+1.1.8 Ensure auditing is configured for Docker files and directories - containerd.sock
+1.1.9 Ensure auditing is configured for Docker files and directories - docker.sock
+1.1.10 Ensure auditing is configured for Docker files and directories - /etc/default/docker
+1.1.11 Ensure auditing is configured for Docker files and directories - /etc/docker/daemon.json
+1.1.12 Ensure auditing is configured for Docker files and directories -
+1.1.13 Ensure auditing is configured for Docker files and directories - /etc/sysconfig/docker
+1.1.14 Ensure auditing is configured for Docker files and directories - /usr/bin/containerd
+1.1.15 Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim
+1.1.16 Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim-
+1.1.17 Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim-
+1.1.18 Ensure auditing is configured for Docker files and directories - /usr/bin/runc
+1.2.1 Ensure the container host has been Hardened
+1.2.2 Ensure that the version of Docker is up to date
+2.2 Ensure network traffic is restricted between containers on the default bridge
+2.3 Ensure the logging level is set to 'info'
+2.4 Ensure Docker is allowed to make changes to iptables
+2.5 Ensure insecure registries are not used
+2.6 Ensure aufs storage driver is not used
+2.7 Ensure devicemapper storage driver is not used
+
+*Prompt Type*
+zero-shot
+*LLM Output*
+element1:
+  name: Docker Daemon Auditing
+  requirements:
+    - Ensure auditing is configured for the Docker daemon
+    - Ensure auditing is configured for Docker files and directories - /etc/default/docker
+    - Ensure auditing is configured for Docker files and directories - /etc/docker
+    - Ensure auditing is configured for Docker files and directories - /etc/sysconfig/docker
+    - Ensure auditing is configured for Docker files and directories - /usr/bin/containerd
+    - Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim
+    - Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim-
+    - Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim-
+    - Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim-
+    - Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim-
+    - Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim-
+element2:
+  name: Container Host Hardening
+  requirements:
+    - Ensure the container host has been Hardened
+    - Ensure that the version of Docker is up to date
+
+
+================================================================================
+
+*LLM Name*
+google/gemma-3-1b-it
+*Prompt Used*
+You are a security analyst. Read the security requirements document below and identify its key data elements.
+A key data element is a configuration item, component or setting that the requirements talk about (for example: container user, image, port, log file).
+One key data element can map to several requirements.
+
+Answer only with YAML in exactly this format and nothing else:
+element1:
+  name: <short name of the key data element>
+  requirements:
+    - <requirement text>
+    - <requirement text>
+element2:
+  name: <short name of the key data element>
+  requirements:
+    - <requirement text>
+
+Document:
+2.8 Ensure TLS authentication for Docker daemon is configured
+2.9 Ensure the default ulimit is configured appropriately
+2.10 Enable user namespace support
+2.11 Ensure the default cgroup usage has been confirmed
+2.12 Ensure base device size is not changed until needed
+2.13 Ensure that authorization for Docker client commands is enabled
+2.14 Ensure centralized and remote logging is configured
+2.15 Ensure containers are restricted from acquiring new privileges
+2.16 Ensure live restore is enabled
+2.17 Ensure Userland Proxy is Disabled
+2.18 Ensure that a daemon-wide custom seccomp profile is applied if appropriate
+2.19 Ensure that experimental features are not implemented in production
+3.1 Ensure that the docker.service file ownership is set to root:root
+3.2 Ensure that docker.service file permissions are appropriately set
+3.3 Ensure that docker.socket file ownership is set to root:root
+3.4 Ensure that docker.socket file permissions are set to 644 or more restrictive
+3.5 Ensure that the /etc/docker directory ownership is set to root:root
+3.6 Ensure that /etc/docker directory permissions are set to 755 or more restrictively
+3.7 Ensure that registry certificate file ownership is set to root:root
+3.8 Ensure that registry certificate file permissions are set to 444 or more restrictively
+3.9 Ensure that TLS CA certificate file ownership is set to root:root
+3.10 Ensure that TLS CA certificate file permissions are set to 444 or more restrictively
+3.11 Ensure that Docker server certificate file ownership is set to root:root
+3.12 Ensure that the Docker server certificate file permissions are set to 444 or more
+3.13 Ensure that the Docker server certificate key file ownership is set to root:root
+3.14 Ensure that the Docker server certificate key file permissions are set to 400
+3.15 Ensure that the Docker socket file ownership is set to root:docker
+3.16 Ensure that the Docker socket file permissions are set to 660 or more restrictively
+
+*Prompt Type*
+zero-shot
+*LLM Output*
+element1:
+  name: Docker Server Certificate
+  requirements:
+    - Ensure that the Docker server certificate file ownership is set to root:root
+    - Ensure that the Docker server certificate key file ownership is set to root:root
+    - Ensure that the Docker server certificate key file permissions are set to 400
+    - Ensure that the Docker socket file ownership is set to root:docker
+    - Ensure that the Docker socket file permissions are set to 660 or more restrictively
+element2:
+  name: Docker Daemon Configuration
+  requirements:
+    - Ensure that the Docker server certificate file ownership is set to root:root
+    - Ensure that the Docker server certificate key file ownership is set to root:root
+    - Ensure that the Docker server certificate key file permissions are set to 400
+    - Ensure that the Docker socket file ownership is set to root:docker
+    - Ensure that the Docker socket file permissions are set to 660 or more restrictively
+
+================================================================================
+
+*LLM Name*
+google/gemma-3-1b-it
+*Prompt Used*
+You are a security analyst. Read the security requirements document below and identify its key data elements.
+A key data element is a configuration item, component or setting that the requirements talk about (for example: container user, image, port, log file).
+One key data element can map to several requirements.
+
+Answer only with YAML in exactly this format and nothing else:
+element1:
+  name: <short name of the key data element>
+  requirements:
+    - <requirement text>
+    - <requirement text>
+element2:
+  name: <short name of the key data element>
+  requirements:
+    - <requirement text>
+
+Document:
+3.17 Ensure that the daemon.json file ownership is set to root:root
+3.18 Ensure that daemon.json file permissions are set to 644 or more restrictive
+3.19 Ensure that the /etc/default/docker file ownership is set to root:root
+3.20 Ensure that the /etc/default/docker file permissions are set to 644 or more restrictively
+3.21 Ensure that the /etc/sysconfig/docker file permissions are set to 644 or more restrictively
+3.22 Ensure that the /etc/sysconfig/docker file ownership is set to root:root
+3.23 Ensure that the Containerd socket file ownership is set to root:root
+3.24 Ensure that the Containerd socket file permissions are set to 660 or more restrictively
+4.1 Ensure that a user for the container has been created
+4.2 Ensure that containers use only trusted base images
+4.3 Ensure that unnecessary packages are not installed in the container
+4.4 Ensure images are scanned and rebuilt to include security patches
+4.5 Ensure Content trust for Docker is Enabled
+4.6 Ensure that HEALTHCHECK instructions have been added to container images
+4.7 Ensure update instructions are not used alone in Dockerfiles
+4.8 Ensure setuid and setgid permissions are removed
+4.9 Ensure that COPY is used instead of ADD in Dockerfiles
+4.10 Ensure secrets are not stored in Dockerfiles
+4.11 Ensure only verified packages are installed
+4.12 Ensure all signed artifacts are validated
+5.1 Ensure swarm mode is not Enabled, if not needed
+5.2 Ensure that, if applicable, an AppArmor Profile is enabled
+5.3 Ensure that, if applicable, SELinux security options are set
+5.4 Ensure that Linux kernel capabilities are restricted within containers
+5.5 Ensure that privileged containers are not used
+5.6 Ensure sensitive host system directories are not mounted on containers
+5.7 Ensure sshd is not run within containers
+5.8 Ensure privileged ports are not mapped within containers
+5.9 Ensure that only needed ports are open on the container
+5.10 Ensure that the host's network namespace is not shared
+
+*Prompt Type*
+zero-shot
+*LLM Output*
+element1:
+  name: /etc/sysconfig/docker
+  requirements:
+    - Ensure that the Containerd socket file ownership is set to root:root
+    - Ensure that the Containerd socket file permissions are set to 660 or more restrictively
+element2:
+  name: /etc/default/docker
+  requirements:
+    - Ensure that a user for the container has been created
+    - Ensure that containers use only trusted base images
+    - Ensure that unnecessary packages are not installed in the container
+    - Ensure images are scanned and rebuilt to include security patches
+    - Ensure Content trust for Docker is Enabled
+    - Ensure that HEALTHCHECK instructions have been added to container images
+    - Ensure update instructions are not used alone in Dockerfiles
+    - Ensure setuid and setgid permissions are removed
+    - Ensure only verified packages are installed
+    - Ensure all signed artifacts are validated
+
+
+================================================================================
+
+*LLM Name*
+google/gemma-3-1b-it
+*Prompt Used*
+You are a security analyst. Read the security requirements document below and identify its key data elements.
+A key data element is a configuration item, component or setting that the requirements talk about (for example: container user, image, port, log file).
+One key data element can map to several requirements.
+
+Answer only with YAML in exactly this format and nothing else:
+element1:
+  name: <short name of the key data element>
+  requirements:
+    - <requirement text>
+    - <requirement text>
+element2:
+  name: <short name of the key data element>
+  requirements:
+    - <requirement text>
+
+Document:
+5.11 Ensure that the memory usage for containers is limited
+5.12 Ensure that CPU priority is set appropriately on containers
+5.13 Ensure that the container's root filesystem is mounted as read only
+5.14 Ensure that incoming container traffic is bound to a specific host interface
+5.15 Ensure that the 'on-failure' container restart policy is set to '5'
+5.16 Ensure that the host's process namespace is not shared
+5.17 Ensure that the host's IPC namespace is not shared
+5.18 Ensure that host devices are not directly exposed to containers
+5.19 Ensure that the default ulimit is overwritten at runtime if needed
+5.20 Ensure mount propagation mode is not set to shared
+5.21 Ensure that the host's UTS namespace is not shared
+5.22 Ensure the default seccomp profile is not Disabled
+5.23 Ensure that docker exec commands are not used with the privileged option
+5.24 Ensure that docker exec commands are not used with the user=root option
+5.25 Ensure that cgroup usage is confirmed
+5.26 Ensure that the container is restricted from acquiring additional privileges
+5.27 Ensure that container health is checked at runtime
+5.28 Ensure that Docker commands always make use of the latest version of their image
+5.29 Ensure that the PIDs cgroup limit is used
+5.30 Ensure that Docker's default bridge "docker0" is not used
+5.31 Ensure that the host's user namespaces are not shared
+5.32 Ensure that the Docker socket is not mounted inside any containers
+6.1 Ensure that image sprawl is avoided
+6.2 Ensure that container sprawl is avoided
+7.1 Ensure that the minimum number of manager nodes have been created in a swarm
+7.2 Ensure that swarm services are bound to a specific host interface
+7.3 Ensure that all Docker swarm overlay networks are encrypted
+7.4 Ensure that Docker's secret management commands are used for managing secrets in a
+7.5 Ensure that swarm manager is run in auto-lock mode
+7.6 Ensure that the swarm manager auto-lock key is rotated periodically
+
+*Prompt Type*
+zero-shot
+*LLM Output*
+element1:
+  name: cgroup usage
+  requirements:
+    - confirmed
+    - confirmed
+    - confirmed
+element2:
+  name: Docker socket
+  requirements:
+    - not mounted
+    - not mounted
+    - not mounted
+element3:
+  name: Docker image sprawl
+  requirements:
+    - avoided
+    - avoided
+    - avoided
+element4:
+  name: container sprawl
+  requirements:
+    - avoided
+    - avoided
+    - avoided
+element5:
+  name: host namespaces
+  requirements:
+    - not shared
+    - not shared
+    - not shared
+element6:
+  name: host device exposure
+  requirements:
+    - not exposed
+    - not exposed
+    - not exposed
+element7:
+  name: ulimit
+  requirements:
+    - overwritten
+    - overwritten
+    - overwritten
+element8:
+  name: docker exec
+  requirements:
+    - not used
+    - not used
+    - not used
+element9:
+  name: docker exec
+  requirements:
+    - not used
+    - not used
+    - not used
+element10:
+  name: host UTS namespace
+  requirements:
+    - not shared
+    - not shared
+    - not shared
+element11:
+  name: host SELinux
+  requirements:
+    - not shared
+    - not shared
+    - not shared
+element12:
+  name: Docker socket
+  requirements:
+    - not mounted
+    - not mounted
+    - not mounted
+element13:
+  name: Docker image sprawl
+  requirements:
+    - avoided
+    - avoided
+    - avoided
+element14:
+  name: container sprawl
+  requirements:
+    - avoided
+    - avoided
+    - avoided
+element15:
+  name: minimum manager nodes
+  requirements:
+    - avoided
+    - avoided
+    - avoided
+element16:
+  name: swarm services
+  requirements:
+    - bound
+    - bound
+    - bound
+element17:
+  name: Docker swarm overlay networks
+  requirements:
+    - encrypted
+    - encrypted
+    - encrypted
+element18:
+  name: Docker secret management
+  requirements:
+    - used
+    - used
+    - used
+element19:
+  name: swarm manager auto-lock
+  requirements:
+    - rotated
+    - rotated
+    - rotated
+element20:
+  name: Docker swarm overlay networks
+  requirements:
+    - encrypted
+    - encrypted
+    - encrypted
+element21:
+  name: Docker socket
+  requirements:
+    - not mounted
+    - not mounted
+    - not mounted
+element22:
+  name: Docker image sprawl
+  requirements:
+    - avoided
+    - avoided
+    - avoided
+element23:
+  name: container sprawl
+  requirements:
+    - avoided
+    - avoided
+    - avoided
+element24:
+  name: host namespaces
+  requirements:
+    - not shared
+    - not shared
+    - not shared
+element25:
+  name: host device exposure
+  requirements:
+    - not exposed
+    - not exposed
+    - not exposed
+
+
+================================================================================
+
+*LLM Name*
+google/gemma-3-1b-it
+*Prompt Used*
+You are a security analyst. Read the security requirements document below and identify its key data elements.
+A key data element is a configuration item, component or setting that the requirements talk about (for example: container user, image, port, log file).
+One key data element can map to several requirements.
+
+Answer only with YAML in exactly this format and nothing else:
+element1:
+  name: <short name of the key data element>
+  requirements:
+    - <requirement text>
+    - <requirement text>
+element2:
+  name: <short name of the key data element>
+  requirements:
+    - <requirement text>
+
+Document:
+7.7 Ensure that node certificates are rotated as appropriate
+7.8 Ensure that CA certificates are rotated as appropriate
+7.9 Ensure that management plane traffic is separated from data plane traffic
+6.3 Enable Detailed Logging
+16.7 Use Standard Hardening Configuration Templates for
+16.5 Use Up-to-Date and Trusted Third-Party Software
+9.2 Ensure Only Approved Ports, Protocols and Services
+18.3 Verify That Acquired Software is Still Supported
+10.5 Enable Anti-Exploitation Features
+
+*Prompt Type*
+zero-shot
+*LLM Output*
+element1:
+  name: Node Certificates
+  requirements:
+    - Rotate node certificates as appropriate
+    - Rotate CA certificates as appropriate
+
+element2:
+  name: Management Plane Traffic
+  requirements:
+    - Separate management plane traffic from data plane traffic
+
+element3:
+  name: CA Certificates
+  requirements:
+    - Rotate CA certificates as appropriate
+
+element4:
+  name: Management Plane Traffic
+  requirements:
+    - Use Standard Hardening Configuration Templates
+    - Use Up-to-Date and Trusted Third-Party Software
+
+element5:
+  name: Ports, Protocols, and Services
+  requirements:
+    - Only Approved Ports, Protocols and Services
+
+element6:
+  name: Software Support
+  requirements:
+    - Verify That Acquired Software is Still Supported
+
+================================================================================
+
+*LLM Name*
+google/gemma-3-1b-it
+*Prompt Used*
+You are a security analyst. Identify the key data elements in a security requirements document.
+A key data element is a configuration item, component or setting that the requirements talk about.
+One key data element can map to several requirements.
+
+Example document:
+4.1 Ensure that a user for the container has been created
+4.6 Ensure that HEALTHCHECK instructions have been added to container images
+4.9 Ensure that COPY is used instead of ADD in Dockerfiles
+5.4 Ensure that privileged containers are not used
+5.25 Ensure that the container is restricted from acquiring additional privileges
+
+Example answer:
+element1:
+  name: container user
+  requirements:
+    - Ensure that a user for the container has been created
+element2:
+  name: healthcheck instruction
+  requirements:
+    - Ensure that HEALTHCHECK instructions have been added to container images
+element3:
+  name: copy instruction
+  requirements:
+    - Ensure that COPY is used instead of ADD in Dockerfiles
+element4:
+  name: container privileges
+  requirements:
+    - Ensure that privileged containers are not used
+    - Ensure that the container is restricted from acquiring additional privileges
+
+Now do the same for the document below. Answer only with YAML in the same format and nothing else.
+
+Document:
+1.1.1 Ensure a separate partition for containers has been created
+1.1.2 Ensure only trusted users are allowed to control Docker daemon
+1.1.3 Ensure auditing is configured for the Docker daemon
+1.1.4 Ensure auditing is configured for Docker files and directories - /run/containerd
+1.1.5 Ensure auditing is configured for Docker files and directories - /var/lib/docker 27
+1.1.6 Ensure auditing is configured for Docker files and directories - /etc/docker
+1.1.7 Ensure auditing is configured for Docker files and directories - docker.service
+1.1.8 Ensure auditing is configured for Docker files and directories - containerd.sock
+1.1.9 Ensure auditing is configured for Docker files and directories - docker.sock
+1.1.10 Ensure auditing is configured for Docker files and directories - /etc/default/docker
+1.1.11 Ensure auditing is configured for Docker files and directories - /etc/docker/daemon.json
+1.1.12 Ensure auditing is configured for Docker files and directories -
+1.1.13 Ensure auditing is configured for Docker files and directories - /etc/sysconfig/docker
+1.1.14 Ensure auditing is configured for Docker files and directories - /usr/bin/containerd
+1.1.15 Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim
+1.1.16 Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim-
+1.1.17 Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim-
+1.1.18 Ensure auditing is configured for Docker files and directories - /usr/bin/runc
+1.2.1 Ensure the container host has been Hardened
+1.2.2 Ensure that the version of Docker is up to date
+2.2 Ensure network traffic is restricted between containers on the default bridge
+2.3 Ensure the logging level is set to 'info'
+2.4 Ensure Docker is allowed to make changes to iptables
+2.5 Ensure insecure registries are not used
+2.6 Ensure aufs storage driver is not used
+2.7 Ensure devicemapper storage driver is not used
+
+*Prompt Type*
+few-shot
+*LLM Output*
+```yaml
+element1:
+  name: container partition
+  requirements:
+    - Ensure a separate partition for containers has been created
+element2:
+  name: trusted user control
+  requirements:
+    - Ensure only trusted users are allowed to control Docker daemon
+element3:
+  name: docker daemon auditing
+  requirements:
+    - Ensure auditing is configured for the Docker daemon
+element4:
+  name: docker file auditing
+  requirements:
+    - Ensure auditing is configured for Docker files and directories - /run/containerd
+    - Ensure auditing is configured for Docker files and directories - /var/lib/docker
+    - Ensure auditing is configured for Docker files and directories - /etc/docker
+    - Ensure auditing is configured for Docker files and directories - docker.service
+    - Ensure auditing is configured for Docker files and directories - containerd.sock
+    - Ensure auditing is configured for Docker files and directories - docker.sock
+    - Ensure auditing is configured for Docker files and directories - /etc/default/docker
+    - Ensure auditing is configured for Docker files and directories - /etc/docker/daemon.json
+    - Ensure auditing is configured for Docker files and directories -
+    - Ensure auditing is configured for Docker files and directories - /etc/sysconfig/docker
+    - Ensure auditing is configured for Docker files and directories - /usr/bin/containerd
+    - Ensure auditing is configured for Docker files and directories - containerd.service
+    - Ensure auditing is configured for Docker files and directories - docker.service
+    - Ensure auditing is configured for Docker files and directories - containerd.sock
+    - Ensure auditing is configured for Docker files and directories - docker.sock
+    - Ensure auditing is configured for Docker files and directories - /etc/default/docker
+    - Ensure auditing is configured for Docker files and directories - /etc/docker/daemon.json
+    - Ensure auditing is configured for Docker files and directories -
+    - Ensure auditing is configured for Docker files and directories - /etc/sysconfig/docker
+    - Ensure auditing is configured for Docker files and directories - /usr/bin/containerd
+    - Ensure auditing is configured for Docker files and directories - containerd-shim
+    - Ensure auditing is configured for Docker files and directories - containerd-shim-
+    - Ensure auditing is configured for Docker files and directories - runc
+element5:
+  name: container host hardening
+  requirements:
+    - Ensure the container host has been Hardened
+element6:
+  name: docker version update
+  requirements:
+    - Ensure the version of Docker is up to date
+element7:
+  name: network traffic restriction
+  requirements:
+    - Ensure network traffic is restricted between containers on the default bridge
+element8:
+  name: logging level
+  requirements:
+    - Ensure the logging level is set to 'info'
+element9:
+  name: iptables changes
+  requirements:
+    - Ensure Docker is allowed to make changes to iptables
+element10:
+  name: aufs storage driver
+  requirements:
+    - Ensure aufs storage driver is not used
+element11:
+  name: runc changes
+  requirements:
+    - Ensure devicemapper storage driver is not used
+```
+
+================================================================================
+
+*LLM Name*
+google/gemma-3-1b-it
+*Prompt Used*
+You are a security analyst. Identify the key data elements in a security requirements document.
+A key data element is a configuration item, component or setting that the requirements talk about.
+One key data element can map to several requirements.
+
+Example document:
+4.1 Ensure that a user for the container has been created
+4.6 Ensure that HEALTHCHECK instructions have been added to container images
+4.9 Ensure that COPY is used instead of ADD in Dockerfiles
+5.4 Ensure that privileged containers are not used
+5.25 Ensure that the container is restricted from acquiring additional privileges
+
+Example answer:
+element1:
+  name: container user
+  requirements:
+    - Ensure that a user for the container has been created
+element2:
+  name: healthcheck instruction
+  requirements:
+    - Ensure that HEALTHCHECK instructions have been added to container images
+element3:
+  name: copy instruction
+  requirements:
+    - Ensure that COPY is used instead of ADD in Dockerfiles
+element4:
+  name: container privileges
+  requirements:
+    - Ensure that privileged containers are not used
+    - Ensure that the container is restricted from acquiring additional privileges
+
+Now do the same for the document below. Answer only with YAML in the same format and nothing else.
+
+Document:
+2.8 Ensure TLS authentication for Docker daemon is configured
+2.9 Ensure the default ulimit is configured appropriately
+2.10 Enable user namespace support
+2.11 Ensure the default cgroup usage has been confirmed
+2.12 Ensure base device size is not changed until needed
+2.13 Ensure that authorization for Docker client commands is enabled
+2.14 Ensure centralized and remote logging is configured
+2.15 Ensure containers are restricted from acquiring new privileges
+2.16 Ensure live restore is enabled
+2.17 Ensure Userland Proxy is Disabled
+2.18 Ensure that a daemon-wide custom seccomp profile is applied if appropriate
+2.19 Ensure that experimental features are not implemented in production
+3.1 Ensure that the docker.service file ownership is set to root:root
+3.2 Ensure that docker.service file permissions are appropriately set
+3.3 Ensure that docker.socket file ownership is set to root:root
+3.4 Ensure that docker.socket file permissions are set to 644 or more restrictive
+3.5 Ensure that the /etc/docker directory ownership is set to root:root
+3.6 Ensure that /etc/docker directory permissions are set to 755 or more restrictively
+3.7 Ensure that registry certificate file ownership is set to root:root
+3.8 Ensure that registry certificate file permissions are set to 444 or more restrictively
+3.9 Ensure that TLS CA certificate file ownership is set to root:root
+3.10 Ensure that TLS CA certificate file permissions are set to 444 or more restrictively
+3.11 Ensure that Docker server certificate file ownership is set to root:root
+3.12 Ensure that the Docker server certificate file permissions are set to 444 or more
+3.13 Ensure that the Docker server certificate key file ownership is set to root:root
+3.14 Ensure that the Docker server certificate key file permissions are set to 400
+3.15 Ensure that the Docker socket file ownership is set to root:docker
+3.16 Ensure that the Docker socket file permissions are set to 660 or more restrictively
+
+*Prompt Type*
+few-shot
+*LLM Output*
+element1:
+  name: TLS authentication
+  requirements:
+    - Ensure TLS authentication for Docker daemon is configured
+element2:
+  name: ulimit
+  requirements:
+    - Ensure the default ulimit is configured appropriately
+element3:
+  name: cgroup usage
+  requirements:
+    - Ensure the default cgroup usage has been confirmed
+element4:
+  name: Docker server certificate
+  requirements:
+    - Ensure that the Docker server certificate file ownership is set to root:root
+element5:
+  name: Docker socket
+  requirements:
+    - Ensure that the Docker socket file permissions are set to 660 or more restrictively
+element6:
+  name: Docker service
+  requirements:
+    - Ensure that the Docker server certificate file ownership is set to root:root
+element7:
+  name: Docker service file permissions
+  requirements:
+    - Ensure that docker.service file permissions are appropriately set
+element8:
+  name: Docker socket file permissions
+  requirements:
+    - Ensure that docker.socket file permissions are set to 660 or more restrictively
+element9:
+  name: /etc/docker directory ownership
+  requirements:
+    - Ensure that the /etc/docker directory ownership is set to root:root
+element10:
+  name: /etc/docker directory permissions
+  requirements:
+    - Ensure that /etc/docker directory permissions are set to 755 or more restrictively
+element11:
+  name: registry certificate
+  requirements:
+    - Ensure that the registry certificate file ownership is set to root:root
+element12:
+  name: registry certificate file permissions
+  requirements:
+    - Ensure that the registry certificate file permissions are set to 444 or more restrictively
+element13:
+  name: Docker server certificate
+  requirements:
+    - Ensure that the Docker server certificate file ownership is set to root:root
+element14:
+  name: Docker server certificate key
+  requirements:
+    - Ensure that the Docker server certificate key file ownership is set to root:root
+element15:
+  name: Docker server certificate key file permissions
+  requirements:
+    - Ensure that the Docker server certificate key file permissions are set to 400
+element16:
+  name: Docker server certificate file ownership
+  requirements:
+    - Ensure that the Docker server certificate file ownership is set to root:root
+element17:
+  name: Docker server certificate key file permissions
+  requirements:
+    - Ensure that the Docker server certificate key file permissions are set to 400
+element18:
+  name: Docker server certificate file ownership
+  requirements:
+    - Ensure that the Docker server certificate file ownership is set to root:root
+element19:
+  name: Docker socket file ownership
+  requirements:
+    - Ensure that the Docker socket file permissions are set to 660 or more restrictively
+element20:
+  name: Docker socket file permissions
+  requirements:
+    - Ensure that the Docker socket file permissions are set to 660 or more restrictively
+
+================================================================================
+
+*LLM Name*
+google/gemma-3-1b-it
+*Prompt Used*
+You are a security analyst. Identify the key data elements in a security requirements document.
+A key data element is a configuration item, component or setting that the requirements talk about.
+One key data element can map to several requirements.
+
+Example document:
+4.1 Ensure that a user for the container has been created
+4.6 Ensure that HEALTHCHECK instructions have been added to container images
+4.9 Ensure that COPY is used instead of ADD in Dockerfiles
+5.4 Ensure that privileged containers are not used
+5.25 Ensure that the container is restricted from acquiring additional privileges
+
+Example answer:
+element1:
+  name: container user
+  requirements:
+    - Ensure that a user for the container has been created
+element2:
+  name: healthcheck instruction
+  requirements:
+    - Ensure that HEALTHCHECK instructions have been added to container images
+element3:
+  name: copy instruction
+  requirements:
+    - Ensure that COPY is used instead of ADD in Dockerfiles
+element4:
+  name: container privileges
+  requirements:
+    - Ensure that privileged containers are not used
+    - Ensure that the container is restricted from acquiring additional privileges
+
+Now do the same for the document below. Answer only with YAML in the same format and nothing else.
+
+Document:
+3.17 Ensure that the daemon.json file ownership is set to root:root
+3.18 Ensure that daemon.json file permissions are set to 644 or more restrictive
+3.19 Ensure that the /etc/default/docker file ownership is set to root:root
+3.20 Ensure that the /etc/default/docker file permissions are set to 644 or more restrictively
+3.21 Ensure that the /etc/sysconfig/docker file permissions are set to 644 or more restrictively
+3.22 Ensure that the /etc/sysconfig/docker file ownership is set to root:root
+3.23 Ensure that the Containerd socket file ownership is set to root:root
+3.24 Ensure that the Containerd socket file permissions are set to 660 or more restrictively
+4.1 Ensure that a user for the container has been created
+4.2 Ensure that containers use only trusted base images
+4.3 Ensure that unnecessary packages are not installed in the container
+4.4 Ensure images are scanned and rebuilt to include security patches
+4.5 Ensure Content trust for Docker is Enabled
+4.6 Ensure that HEALTHCHECK instructions have been added to container images
+4.7 Ensure update instructions are not used alone in Dockerfiles
+4.8 Ensure setuid and setgid permissions are removed
+4.9 Ensure that COPY is used instead of ADD in Dockerfiles
+4.10 Ensure secrets are not stored in Dockerfiles
+4.11 Ensure only verified packages are installed
+4.12 Ensure all signed artifacts are validated
+5.1 Ensure swarm mode is not Enabled, if not needed
+5.2 Ensure that, if applicable, an AppArmor Profile is enabled
+5.3 Ensure that, if applicable, SELinux security options are set
+5.4 Ensure that Linux kernel capabilities are restricted within containers
+5.5 Ensure that privileged containers are not used
+5.6 Ensure sensitive host system directories are not mounted on containers
+5.7 Ensure sshd is not run within containers
+5.8 Ensure privileged ports are not mapped within containers
+5.9 Ensure that only needed ports are open on the container
+5.10 Ensure that the host's network namespace is not shared
+
+*Prompt Type*
+few-shot
+*LLM Output*
+element1:
+  name: daemon.json ownership
+  requirements:
+    - Ensure that the daemon.json file ownership is set to root:root
+element2:
+  name: daemon.json permissions
+  requirements:
+    - Ensure that daemon.json file permissions are set to 644 or more restrictive
+element3:
+  name: /etc/default/docker file ownership
+  requirements:
+    - Ensure that /etc/default/docker file ownership is set to root:root
+element4:
+  name: /etc/default/docker file permissions
+  requirements:
+    - Ensure that /etc/default/docker file permissions are set to 644 or more restrictively
+element5:
+  name: /etc/sysconfig/docker file ownership
+  requirements:
+    - Ensure that /etc/sysconfig/docker file ownership is set to root:root
+element6:
+  name: /etc/sysconfig/docker file permissions
+  requirements:
+    - Ensure that /etc/sysconfig/docker file permissions are set to 644 or more restrictively
+element7:
+  name: Containerd socket ownership
+  requirements:
+    - Ensure that the Containerd socket file ownership is set to root:root
+element8:
+  name: Containerd socket permissions
+  requirements:
+    - Ensure that the Containerd socket file permissions are set to 660 or more restrictively
+element9:
+  name: COPY instruction
+  requirements:
+    - Ensure that COPY is used instead of ADD in Dockerfiles
+element10:
+  name: Secrets
+  requirements:
+    - Ensure that secrets are not stored in Dockerfiles
+element11:
+  name: Verified Packages
+  requirements:
+    - Ensure that only verified packages are installed
+element12:
+  name: Signed Artifacts
+  requirements:
+    - Ensure that all signed artifacts are validated
+
+
+================================================================================
+
+*LLM Name*
+google/gemma-3-1b-it
+*Prompt Used*
+You are a security analyst. Identify the key data elements in a security requirements document.
+A key data element is a configuration item, component or setting that the requirements talk about.
+One key data element can map to several requirements.
+
+Example document:
+4.1 Ensure that a user for the container has been created
+4.6 Ensure that HEALTHCHECK instructions have been added to container images
+4.9 Ensure that COPY is used instead of ADD in Dockerfiles
+5.4 Ensure that privileged containers are not used
+5.25 Ensure that the container is restricted from acquiring additional privileges
+
+Example answer:
+element1:
+  name: container user
+  requirements:
+    - Ensure that a user for the container has been created
+element2:
+  name: healthcheck instruction
+  requirements:
+    - Ensure that HEALTHCHECK instructions have been added to container images
+element3:
+  name: copy instruction
+  requirements:
+    - Ensure that COPY is used instead of ADD in Dockerfiles
+element4:
+  name: container privileges
+  requirements:
+    - Ensure that privileged containers are not used
+    - Ensure that the container is restricted from acquiring additional privileges
+
+Now do the same for the document below. Answer only with YAML in the same format and nothing else.
+
+Document:
+5.11 Ensure that the memory usage for containers is limited
+5.12 Ensure that CPU priority is set appropriately on containers
+5.13 Ensure that the container's root filesystem is mounted as read only
+5.14 Ensure that incoming container traffic is bound to a specific host interface
+5.15 Ensure that the 'on-failure' container restart policy is set to '5'
+5.16 Ensure that the host's process namespace is not shared
+5.17 Ensure that the host's IPC namespace is not shared
+5.18 Ensure that host devices are not directly exposed to containers
+5.19 Ensure that the default ulimit is overwritten at runtime if needed
+5.20 Ensure mount propagation mode is not set to shared
+5.21 Ensure that the host's UTS namespace is not shared
+5.22 Ensure the default seccomp profile is not Disabled
+5.23 Ensure that docker exec commands are not used with the privileged option
+5.24 Ensure that docker exec commands are not used with the user=root option
+5.25 Ensure that cgroup usage is confirmed
+5.26 Ensure that the container is restricted from acquiring additional privileges
+5.27 Ensure that container health is checked at runtime
+5.28 Ensure that Docker commands always make use of the latest version of their image
+5.29 Ensure that the PIDs cgroup limit is used
+5.30 Ensure that Docker's default bridge "docker0" is not used
+5.31 Ensure that the host's user namespaces are not shared
+5.32 Ensure that the Docker socket is not mounted inside any containers
+6.1 Ensure that image sprawl is avoided
+6.2 Ensure that container sprawl is avoided
+7.1 Ensure that the minimum number of manager nodes have been created in a swarm
+7.2 Ensure that swarm services are bound to a specific host interface
+7.3 Ensure that all Docker swarm overlay networks are encrypted
+7.4 Ensure that Docker's secret management commands are used for managing secrets in a
+7.5 Ensure that swarm manager is run in auto-lock mode
+7.6 Ensure that the swarm manager auto-lock key is rotated periodically
+
+*Prompt Type*
+few-shot
+*LLM Output*
+```yaml
+element1:
+  name: memory usage limit
+  requirements:
+    - Ensure that the memory usage for containers is limited
+element2:
+  name: CPU priority
+  requirements:
+    - Ensure that CPU priority is set appropriately on containers
+element3:
+  name: root filesystem read-only
+  requirements:
+    - Ensure the container's root filesystem is mounted as read-only
+element4:
+  name: host interface binding
+  requirements:
+    - Ensure that incoming container traffic is bound to a specific host interface
+element5:
+  name: on-failure container restart policy
+  requirements:
+    - Ensure that the container's 'on-failure' container restart policy is set to '5'
+element6:
+  name: host process namespace sharing
+  requirements:
+    - Ensure that the host's process namespace is not shared
+element7:
+  name: host IPC namespace sharing
+  requirements:
+    - Ensure that the host's IPC namespace is not shared
+element8:
+  name: host device exposure
+  requirements:
+    - Ensure that host devices are not directly exposed to containers
+element9:
+  name: ulimit override
+  requirements:
+    - Ensure that the default ulimit is overwritten at runtime if needed
+element10:
+  name: mount propagation mode
+  requirements:
+    - Ensure that mount propagation mode is not set to shared
+element11:
+  name: UTS namespace sharing
+  requirements:
+    - Ensure that the host's UTS namespace is not shared
+element12:
+  name: seccomp profile
+  requirements:
+    - Ensure that docker exec commands are not used with the privileged option
+element13:
+  name: docker exec commands
+  requirements:
+    - Ensure that docker exec commands are not used with the privileged option
+element14:
+  name: docker exec commands
+  requirements:
+    - Ensure that docker exec commands are not used with the user=root option
+element15:
+  name: cgroup usage
+  requirements:
+    - Ensure that cgroup usage is confirmed
+element16:
+  name: container restrictions
+  requirements:
+    - Ensure that the container is restricted from acquiring additional privileges
+element17:
+  name: runtime health check
+  requirements:
+    - Ensure that container health is checked at runtime
+element18:
+  name: Docker command usage
+  requirements:
+    - Ensure that Docker commands always make use of the latest version of their image
+element19:
+  name: PIDs cgroup limit
+  requirements:
+    - Ensure that Docker's default bridge "docker0" is not used
+element20:
+  name: Docker socket mounting
+  requirements:
+    - Ensure that Docker's default bridge "docker0" is not used
+element21:
+  name: image sprawl avoidance
+  requirements:
+    - Ensure that image sprawl is avoided
+element22:
+  name: container sprawl avoidance
+  requirements:
+    - Ensure that container sprawl is avoided
+element23:
+  name: minimum manager nodes
+  requirements:
+    - Ensure that the minimum number of manager nodes have been created in a swarm
+element24:
+  name: swarm service binding
+  requirements:
+    - Ensure that swarm services are bound to a specific host interface
+element25:
+  name: docker swarm overlay networks
+  requirements:
+    - Ensure that Docker's default bridge "docker0" is not used
+element26:
+  name: secret management
+  requirements:
+    - Ensure that Docker's secret management commands are used for managing secrets in a
+element27:
+  name: swarm manager auto-lock
+  requirements:
+    - Ensure that the swarm manager auto-lock key is rotated periodically
+```
+
+================================================================================
+
+*LLM Name*
+google/gemma-3-1b-it
+*Prompt Used*
+You are a security analyst. Identify the key data elements in a security requirements document.
+A key data element is a configuration item, component or setting that the requirements talk about.
+One key data element can map to several requirements.
+
+Example document:
+4.1 Ensure that a user for the container has been created
+4.6 Ensure that HEALTHCHECK instructions have been added to container images
+4.9 Ensure that COPY is used instead of ADD in Dockerfiles
+5.4 Ensure that privileged containers are not used
+5.25 Ensure that the container is restricted from acquiring additional privileges
+
+Example answer:
+element1:
+  name: container user
+  requirements:
+    - Ensure that a user for the container has been created
+element2:
+  name: healthcheck instruction
+  requirements:
+    - Ensure that HEALTHCHECK instructions have been added to container images
+element3:
+  name: copy instruction
+  requirements:
+    - Ensure that COPY is used instead of ADD in Dockerfiles
+element4:
+  name: container privileges
+  requirements:
+    - Ensure that privileged containers are not used
+    - Ensure that the container is restricted from acquiring additional privileges
+
+Now do the same for the document below. Answer only with YAML in the same format and nothing else.
+
+Document:
+7.7 Ensure that node certificates are rotated as appropriate
+7.8 Ensure that CA certificates are rotated as appropriate
+7.9 Ensure that management plane traffic is separated from data plane traffic
+6.3 Enable Detailed Logging
+16.7 Use Standard Hardening Configuration Templates for
+16.5 Use Up-to-Date and Trusted Third-Party Software
+9.2 Ensure Only Approved Ports, Protocols and Services
+18.3 Verify That Acquired Software is Still Supported
+10.5 Enable Anti-Exploitation Features
+
+*Prompt Type*
+few-shot
+*LLM Output*
+element1:
+  name: node certificates
+  requirements:
+    - Ensure that node certificates are rotated as appropriate
+element2:
+  name: CA certificates
+  requirements:
+    - Ensure that CA certificates are rotated as appropriate
+element3:
+  name: management plane traffic
+  requirements:
+    - Separate management plane traffic from data plane traffic
+element4:
+  name: standard hardening configuration templates
+  requirements:
+    - Use Standard Hardening Configuration Templates for
+element5:
+  name: up-to-date and trusted third-party software
+  requirements:
+    - Use Up-to-Date and Trusted Third-Party Software
+element6:
+  name: approved ports, protocols and services
+  requirements:
+    - Use Only Approved Ports, Protocols and Services
+element7:
+  name: acquired software support
+  requirements:
+    - Verify That Acquired Software is Still Supported
+element8:
+  name: anti-exploitation features
+  requirements:
+    - Enable Anti-Exploitation Features
+
+================================================================================
+
+*LLM Name*
+google/gemma-3-1b-it
+*Prompt Used*
+You are a security analyst. Identify the key data elements in the security requirements document below.
+A key data element is a configuration item, component or setting that the requirements talk about.
+One key data element can map to several requirements.
+
+Think step by step:
+Step 1: List every requirement in the document (lines such as "Ensure that ...").
+Step 2: For each requirement, decide which configuration item, component or setting it is about.
+Step 3: Group requirements that are about the same item under one key data element.
+Step 4: Write the result as YAML in exactly this format:
+element1:
+  name: <short name of the key data element>
+  requirements:
+    - <requirement text>
+    - <requirement text>
+element2:
+  name: <short name of the key data element>
+  requirements:
+    - <requirement text>
+
+After your reasoning, write the final YAML after a line that says FINAL ANSWER:
+
+Document:
+1.1.1 Ensure a separate partition for containers has been created
+1.1.2 Ensure only trusted users are allowed to control Docker daemon
+1.1.3 Ensure auditing is configured for the Docker daemon
+1.1.4 Ensure auditing is configured for Docker files and directories - /run/containerd
+1.1.5 Ensure auditing is configured for Docker files and directories - /var/lib/docker 27
+1.1.6 Ensure auditing is configured for Docker files and directories - /etc/docker
+1.1.7 Ensure auditing is configured for Docker files and directories - docker.service
+1.1.8 Ensure auditing is configured for Docker files and directories - containerd.sock
+1.1.9 Ensure auditing is configured for Docker files and directories - docker.sock
+1.1.10 Ensure auditing is configured for Docker files and directories - /etc/default/docker
+1.1.11 Ensure auditing is configured for Docker files and directories - /etc/docker/daemon.json
+1.1.12 Ensure auditing is configured for Docker files and directories -
+1.1.13 Ensure auditing is configured for Docker files and directories - /etc/sysconfig/docker
+1.1.14 Ensure auditing is configured for Docker files and directories - /usr/bin/containerd
+1.1.15 Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim
+1.1.16 Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim-
+1.1.17 Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim-
+1.1.18 Ensure auditing is configured for Docker files and directories - /usr/bin/runc
+1.2.1 Ensure the container host has been Hardened
+1.2.2 Ensure that the version of Docker is up to date
+2.2 Ensure network traffic is restricted between containers on the default bridge
+2.3 Ensure the logging level is set to 'info'
+2.4 Ensure Docker is allowed to make changes to iptables
+2.5 Ensure insecure registries are not used
+2.6 Ensure aufs storage driver is not used
+2.7 Ensure devicemapper storage driver is not used
+
+*Prompt Type*
+chain-of-thought
+*LLM Output*
+element1:
+  name: Auditing
+  requirements:
+    - 1.1.1
+    - 1.1.2
+    - 1.1.3
+    - 1.1.4
+    - 1.1.5
+    - 1.1.6
+    - 1.1.7
+    - 1.1.8
+    - 1.1.9
+    - 1.1.10
+    - 1.1.11
+    - 1.1.12
+    - 1.1.13
+    - 1.1.14
+    - 1.1.15
+    - 1.1.16
+    - 2.2
+    - 2.3
+    - 2.4
+    - 2.5
+    - 2.6
+    - 2.7
+
+================================================================================
+
+*LLM Name*
+google/gemma-3-1b-it
+*Prompt Used*
+You are a security analyst. Identify the key data elements in the security requirements document below.
+A key data element is a configuration item, component or setting that the requirements talk about.
+One key data element can map to several requirements.
+
+Think step by step:
+Step 1: List every requirement in the document (lines such as "Ensure that ...").
+Step 2: For each requirement, decide which configuration item, component or setting it is about.
+Step 3: Group requirements that are about the same item under one key data element.
+Step 4: Write the result as YAML in exactly this format:
+element1:
+  name: <short name of the key data element>
+  requirements:
+    - <requirement text>
+    - <requirement text>
+element2:
+  name: <short name of the key data element>
+  requirements:
+    - <requirement text>
+
+After your reasoning, write the final YAML after a line that says FINAL ANSWER:
+
+Document:
+2.8 Ensure TLS authentication for Docker daemon is configured
+2.9 Ensure the default ulimit is configured appropriately
+2.10 Enable user namespace support
+2.11 Ensure the default cgroup usage has been confirmed
+2.12 Ensure base device size is not changed until needed
+2.13 Ensure that authorization for Docker client commands is enabled
+2.14 Ensure centralized and remote logging is configured
+2.15 Ensure containers are restricted from acquiring new privileges
+2.16 Ensure live restore is enabled
+2.17 Ensure Userland Proxy is Disabled
+2.18 Ensure that a daemon-wide custom seccomp profile is applied if appropriate
+2.19 Ensure that experimental features are not implemented in production
+3.1 Ensure that the docker.service file ownership is set to root:root
+3.2 Ensure that docker.service file permissions are appropriately set
+3.3 Ensure that docker.socket file ownership is set to root:root
+3.4 Ensure that docker.socket file permissions are set to 644 or more restrictive
+3.5 Ensure that the /etc/docker directory ownership is set to root:root
+3.6 Ensure that /etc/docker directory permissions are set to 755 or more restrictively
+3.7 Ensure that registry certificate file ownership is set to root:root
+3.8 Ensure that registry certificate file permissions are set to 444 or more restrictively
+3.9 Ensure that TLS CA certificate file ownership is set to root:root
+3.10 Ensure that TLS CA certificate file permissions are set to 444 or more restrictively
+3.11 Ensure that Docker server certificate file ownership is set to root:root
+3.12 Ensure that the Docker server certificate file permissions are set to 444 or more
+3.13 Ensure that the Docker server certificate key file ownership is set to root:root
+3.14 Ensure that the Docker server certificate key file permissions are set to 400
+3.15 Ensure that the Docker socket file ownership is set to root:docker
+3.16 Ensure that the Docker socket file permissions are set to 660 or more restrictively
+
+*Prompt Type*
+chain-of-thought
+*LLM Output*
+```yaml
+element1:
+  name: TLS Authentication Configuration
+  requirements:
+    - 2.8
+    - 2.9
+    - 2.10
+    - 2.11
+    - 2.12
+    - 2.13
+    - 2.14
+    - 2.15
+    - 2.16
+    - 2.17
+    - 2.18
+    - 2.19
+    - 2.20
+element2:
+  name: Default Ulimit Configuration
+  requirements:
+    - 2.9
+```
+
+FINAL ANSWER:
+```yaml
+element1:
+  name: TLS Authentication Configuration
+  requirements:
+    - 2.8
+    - 2.9
+    - 2.10
+    - 2.11
+    - 2.12
+    - 2.13
+    - 2.14
+    - 2.15
+    - 2.16
+    - 2.17
+    - 2.18
+    - 2.19
+    - 2.20
+element2:
+  name: Default Ulimit Configuration
+  requirements:
+    - 2.9
+```
+
+================================================================================
+
+*LLM Name*
+google/gemma-3-1b-it
+*Prompt Used*
+You are a security analyst. Identify the key data elements in the security requirements document below.
+A key data element is a configuration item, component or setting that the requirements talk about.
+One key data element can map to several requirements.
+
+Think step by step:
+Step 1: List every requirement in the document (lines such as "Ensure that ...").
+Step 2: For each requirement, decide which configuration item, component or setting it is about.
+Step 3: Group requirements that are about the same item under one key data element.
+Step 4: Write the result as YAML in exactly this format:
+element1:
+  name: <short name of the key data element>
+  requirements:
+    - <requirement text>
+    - <requirement text>
+element2:
+  name: <short name of the key data element>
+  requirements:
+    - <requirement text>
+
+After your reasoning, write the final YAML after a line that says FINAL ANSWER:
+
+Document:
+3.17 Ensure that the daemon.json file ownership is set to root:root
+3.18 Ensure that daemon.json file permissions are set to 644 or more restrictive
+3.19 Ensure that the /etc/default/docker file ownership is set to root:root
+3.20 Ensure that the /etc/default/docker file permissions are set to 644 or more restrictively
+3.21 Ensure that the /etc/sysconfig/docker file permissions are set to 644 or more restrictively
+3.22 Ensure that the /etc/sysconfig/docker file ownership is set to root:root
+3.23 Ensure that the Containerd socket file ownership is set to root:root
+3.24 Ensure that the Containerd socket file permissions are set to 660 or more restrictively
+4.1 Ensure that a user for the container has been created
+4.2 Ensure that containers use only trusted base images
+4.3 Ensure that unnecessary packages are not installed in the container
+4.4 Ensure images are scanned and rebuilt to include security patches
+4.5 Ensure Content trust for Docker is Enabled
+4.6 Ensure that HEALTHCHECK instructions have been added to container images
+4.7 Ensure update instructions are not used alone in Dockerfiles
+4.8 Ensure setuid and setgid permissions are removed
+4.9 Ensure that COPY is used instead of ADD in Dockerfiles
+4.10 Ensure secrets are not stored in Dockerfiles
+4.11 Ensure only verified packages are installed
+4.12 Ensure all signed artifacts are validated
+5.1 Ensure swarm mode is not Enabled, if not needed
+5.2 Ensure that, if applicable, an AppArmor Profile is enabled
+5.3 Ensure that, if applicable, SELinux security options are set
+5.4 Ensure that Linux kernel capabilities are restricted within containers
+5.5 Ensure that privileged containers are not used
+5.6 Ensure sensitive host system directories are not mounted on containers
+5.7 Ensure sshd is not run within containers
+5.8 Ensure privileged ports are not mapped within containers
+5.9 Ensure that only needed ports are open on the container
+5.10 Ensure that the host's network namespace is not shared
+
+*Prompt Type*
+chain-of-thought
+*LLM Output*
+```yaml
+element1:
+  name: Ensure that the daemon.json file ownership is set to root:root
+  requirements:
+    - 3.18
+    - 3.19
+    - 3.19
+    - 3.19
+    - 3.19
+    - 3.22
+    - 3.23
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 3.24
+    - 
+
+================================================================================
+
+*LLM Name*
+google/gemma-3-1b-it
+*Prompt Used*
+You are a security analyst. Identify the key data elements in the security requirements document below.
+A key data element is a configuration item, component or setting that the requirements talk about.
+One key data element can map to several requirements.
+
+Think step by step:
+Step 1: List every requirement in the document (lines such as "Ensure that ...").
+Step 2: For each requirement, decide which configuration item, component or setting it is about.
+Step 3: Group requirements that are about the same item under one key data element.
+Step 4: Write the result as YAML in exactly this format:
+element1:
+  name: <short name of the key data element>
+  requirements:
+    - <requirement text>
+    - <requirement text>
+element2:
+  name: <short name of the key data element>
+  requirements:
+    - <requirement text>
+
+After your reasoning, write the final YAML after a line that says FINAL ANSWER:
+
+Document:
+5.11 Ensure that the memory usage for containers is limited
+5.12 Ensure that CPU priority is set appropriately on containers
+5.13 Ensure that the container's root filesystem is mounted as read only
+5.14 Ensure that incoming container traffic is bound to a specific host interface
+5.15 Ensure that the 'on-failure' container restart policy is set to '5'
+5.16 Ensure that the host's process namespace is not shared
+5.17 Ensure that the host's IPC namespace is not shared
+5.18 Ensure that host devices are not directly exposed to containers
+5.19 Ensure that the default ulimit is overwritten at runtime if needed
+5.20 Ensure mount propagation mode is not set to shared
+5.21 Ensure that the host's UTS namespace is not shared
+5.22 Ensure the default seccomp profile is not Disabled
+5.23 Ensure that docker exec commands are not used with the privileged option
+5.24 Ensure that docker exec commands are not used with the user=root option
+5.25 Ensure that cgroup usage is confirmed
+5.26 Ensure that the container is restricted from acquiring additional privileges
+5.27 Ensure that container health is checked at runtime
+5.28 Ensure that Docker commands always make use of the latest version of their image
+5.29 Ensure that the PIDs cgroup limit is used
+5.30 Ensure that Docker's default bridge "docker0" is not used
+5.31 Ensure that the host's user namespaces are not shared
+5.32 Ensure that the Docker socket is not mounted inside any containers
+6.1 Ensure that image sprawl is avoided
+6.2 Ensure that container sprawl is avoided
+7.1 Ensure that the minimum number of manager nodes have been created in a swarm
+7.2 Ensure that swarm services are bound to a specific host interface
+7.3 Ensure that all Docker swarm overlay networks are encrypted
+7.4 Ensure that Docker's secret management commands are used for managing secrets in a
+7.5 Ensure that swarm manager is run in auto-lock mode
+7.6 Ensure that the swarm manager auto-lock key is rotated periodically
+
+*Prompt Type*
+chain-of-thought
+*LLM Output*
+```yaml
+element1:
+  name: Memory Usage
+  requirements:
+    - 5.11
+    - 5.12
+    - 5.13
+    - 5.14
+    - 5.15
+    - 5.26
+    - 5.27
+    - 5.28
+    - 5.29
+    - 5.30
+    - 5.31
+    - 5.32
+    - 5.33
+    - 5.34
+element2:
+  name: CPU Priority
+  requirements:
+    - 5.12
+    - 5.13
+    - 5.14
+    - 5.15
+    - 5.26
+    - 5.27
+    - 5.28
+    - 5.29
+    - 5.30
+    - 5.31
+    - 5.32
+    - 5.33
+    - 5.34
+```
+
+FINAL ANSWER:
+```yaml
+element1:
+  name: Memory Usage
+  requirements:
+    - 5.11
+    - 5.12
+    - 5.13
+    - 5.14
+    - 5.15
+    - 5.26
+    - 5.27
+    - 5.28
+    - 5.29
+    - 5.30
+    - 5.31
+    - 5.32
+    - 5.33
+    - 5.34
+element2:
+  name: CPU Priority
+  requirements:
+    - 5.12
+    - 5.13
+    - 5.14
+    - 5.15
+    - 5.26
+    - 5.27
+    - 5.28
+    - 5.29
+    - 5.30
+    - 5.31
+    - 5.32
+    - 5.33
+    - 5.34
+```
+
+================================================================================
+
+*LLM Name*
+google/gemma-3-1b-it
+*Prompt Used*
+You are a security analyst. Identify the key data elements in the security requirements document below.
+A key data element is a configuration item, component or setting that the requirements talk about.
+One key data element can map to several requirements.
+
+Think step by step:
+Step 1: List every requirement in the document (lines such as "Ensure that ...").
+Step 2: For each requirement, decide which configuration item, component or setting it is about.
+Step 3: Group requirements that are about the same item under one key data element.
+Step 4: Write the result as YAML in exactly this format:
+element1:
+  name: <short name of the key data element>
+  requirements:
+    - <requirement text>
+    - <requirement text>
+element2:
+  name: <short name of the key data element>
+  requirements:
+    - <requirement text>
+
+After your reasoning, write the final YAML after a line that says FINAL ANSWER:
+
+Document:
+7.7 Ensure that node certificates are rotated as appropriate
+7.8 Ensure that CA certificates are rotated as appropriate
+7.9 Ensure that management plane traffic is separated from data plane traffic
+6.3 Enable Detailed Logging
+16.7 Use Standard Hardening Configuration Templates for
+16.5 Use Up-to-Date and Trusted Third-Party Software
+9.2 Ensure Only Approved Ports, Protocols and Services
+18.3 Verify That Acquired Software is Still Supported
+10.5 Enable Anti-Exploitation Features
+
+*Prompt Type*
+chain-of-thought
+*LLM Output*
+element1:
+  name: Node Certificates
+  requirements:
+    - "Ensure that node certificates are rotated as appropriate"
+    - "Ensure that CA certificates are rotated as appropriate"
+
+element2:
+  name: Management Plane Traffic
+  requirements:
+    - "Ensure that management plane traffic is separated from data plane traffic"
+
+element3:
+  name: Hardening Configuration
+  requirements:
+    - "Ensure Only Approved Ports, Protocols and Services"
+    - "Use Standard Hardening Configuration Templates for"
+
+element4:
+  name: Software Updates
+  requirements:
+    - "Ensure Only Approved Software is Still Supported"
+
+element5:
+  name: Anti-Exploitation
+  requirements:
+    - "Verify That Acquired Software is Still Supported"
+
+FINAL ANSWER:
+element1:
+  name: Node Certificates
+  requirements:
+    - "Ensure that node certificates are rotated as appropriate"
+    - "Ensure that CA certificates are rotated as appropriate"
+
+element2:
+  name: Management Plane Traffic
+  requirements:
+    - "Ensure that management plane traffic is separated from data plane traffic"
+
+element3:
+  name: Hardening Configuration
+  requirements:
+    - "Ensure Only Approved Ports, Protocols and Services"
+    - "Use Standard Hardening Configuration Templates for"
+
+element4:
+  name: Software Updates
+  requirements:
+    - "Ensure Only Approved Software is Still Supported"
+
+element5:
+  name: Anti-Exploitation
+  requirements:
+    - "Verify That Acquired Software is Still Supported"
+
+================================================================================
+

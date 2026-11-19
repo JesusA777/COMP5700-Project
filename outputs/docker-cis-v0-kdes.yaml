@@ -1,0 +1,231 @@
+element1:
+  name: Docker Files and Directories Auditing
+  requirements:
+  - Ensure auditing is configured for Docker files and directories
+element2:
+  name: Container Host Hardening
+  requirements:
+  - Ensure the container host has been Hardened
+  - Ensure that the version of Docker is up to date
+  - Use Up-to-Date and Trusted Third-Party Software
+element3:
+  name: UTS namespace
+  requirements:
+  - Ensure that the host's UTS namespace is not shared
+element4:
+  name: seccomp profile
+  requirements:
+  - Ensure the default seccomp profile is not Disabled
+element5:
+  name: docker exec commands
+  requirements:
+  - Ensure that docker exec commands are not used with the
+element6:
+  name: cgroup usage
+  requirements:
+  - Ensure that cgroup usage is confirmed
+element7:
+  name: container health
+  requirements:
+  - Ensure that container health is checked at runtime
+element8:
+  name: Docker commands
+  requirements:
+  - Ensure that Docker commands always make use of the
+element9:
+  name: PIDs cgroup limit
+  requirements:
+  - Ensure that the container is restricted from acquiring
+element10:
+  name: Docker bridge "docker0
+  requirements:
+  - Ensure that Docker's default bridge "docker0" is not used
+element11:
+  name: host user namespaces
+  requirements:
+  - Ensure that the host's user namespaces are not shared
+element12:
+  name: Docker socket
+  requirements:
+  - Ensure that the Docker socket is not mounted inside any
+element13:
+  name: minimum manager nodes
+  requirements:
+  - Ensure that the minimum number of manager nodes have
+element14:
+  name: swarm services
+  requirements:
+  - Ensure that swarm services are bound to a specific host
+element15:
+  name: Docker swarm overlay networks
+  requirements:
+  - Ensure that Docker's default bridge "docker0" is not used
+  - Ensure that all Docker swarm overlay networks are encrypted
+element16:
+  name: Docker secret management
+  requirements:
+  - Ensure that swarm manager is run in auto-lock mode
+element17:
+  name: container partition
+  requirements:
+  - Ensure a separate partition for containers has been created
+element18:
+  name: trusted user control
+  requirements:
+  - Ensure only trusted users are allowed to control Docker
+element19:
+  name: Docker daemon auditing
+  requirements:
+  - Ensure auditing is configured for the Docker daemon
+element20:
+  name: Docker file/dir auditing
+  requirements:
+  - Ensure auditing is configured for Docker files and
+element21:
+  name: Docker server certificate
+  requirements:
+  - Ensure that Docker server certificate file ownership is set to
+  - Ensure that the Docker server certificate key file permissions
+  - Ensure that the Docker server certificate file permissions are
+  - Ensure that the Docker socket file ownership is set to
+  - Ensure that the Docker socket file permissions are set to 660
+element22:
+  name: Docker daemon file permissions
+  requirements:
+  - Ensure that the daemon.json file ownership is set to root:root
+  - Ensure that daemon.json file permissions are set to 644 or
+  - Ensure that the /etc/default/docker file ownership is set to
+  - Ensure that the /etc/default/docker file permissions are set to
+  - Ensure that the /etc/sysconfig/docker file ownership is set to
+  - Ensure that the /etc/sysconfig/docker file permissions are set
+element23:
+  name: Docker socket file permissions
+  requirements:
+  - Ensure that the Docker socket file permissions are set to 660
+  - Ensure that docker.socket file permissions are set to 644 or
+  - Ensure that the /etc/sysconfig/docker file ownership is set to
+  - Ensure that the /etc/default/docker file permissions are set to
+  - Ensure that the /etc/sysconfig/docker file permissions are set
+element24:
+  name: Docker container socket file permissions
+  requirements:
+  - Ensure that the Docker socket file permissions are set to 660
+  - Ensure that docker.socket file permissions are set to 644 or
+  - Ensure that the /etc/sysconfig/docker file ownership is set to
+  - Ensure that the /etc/default/docker file permissions are set to
+element25:
+  name: container user
+  requirements:
+  - Ensure that a user for the container has been created
+element26:
+  name: containers use only trusted base images
+  requirements:
+  - Ensure that unnecessary packages are not installed in the
+element27:
+  name: copy instruction
+  requirements:
+  - Ensure that COPY is used instead of ADD in Dockerfiles
+element28:
+  name: container privileges
+  requirements:
+  - Ensure that privileged containers are not used
+element29:
+  name: secrets are not stored in Dockerfiles
+  requirements:
+  - Ensure Content trust for Docker is Enabled
+element30:
+  name: update instructions are not used alone in Dockerfiles
+  requirements:
+  - Ensure only verified packages are installed
+element31:
+  name: signed artifacts are validated
+  requirements:
+  - Ensure all signed artifacts are validated
+element32:
+  name: memory usage for containers is limited
+  requirements:
+  - Ensure that only needed ports are open on the container
+element33:
+  name: CPU priority is set appropriately on containers
+  requirements:
+  - Ensure that the container's root filesystem is mounted as
+element34:
+  name: host network namespace is not shared
+  requirements:
+  - Ensure that the host's network namespace is not shared
+element35:
+  name: host devices are not directly exposed to
+  requirements:
+  - Ensure that host devices are not directly exposed to
+element36:
+  name: ulimit is overwritten at runtime
+  requirements:
+  - Ensure that the default ulimit is overwritten at runtime if
+element37:
+  name: mount propagation mode is not set to shared
+  requirements:
+  - Ensure mount propagation mode is not set to shared
+element38:
+  name: Docker bridge
+  requirements:
+  - Ensure that Docker's default bridge "docker0" is not used
+element39:
+  name: host namespaces
+  requirements:
+  - Ensure that the host's user namespaces are not shared
+element40:
+  name: image sprawl
+  requirements:
+  - Ensure that image sprawl is avoided
+element41:
+  name: container sprawl
+  requirements:
+  - Ensure that container sprawl is avoided
+element42:
+  name: swarm manager auto-lock key
+  requirements:
+  - Ensure that node certificates are rotated as appropriate
+element43:
+  name: CA certificates
+  requirements:
+  - Ensure that CA certificates are rotated as appropriate
+element44:
+  name: management plane traffic
+  requirements:
+  - Ensure that management plane traffic is separated from data
+element45:
+  name: Host UTS Namespace
+  requirements:
+  - Ensure that the host's UTS namespace is not shared
+  - Ensure the default seccomp profile is not Disabled
+  - Ensure that docker exec commands are not used with the
+  - Ensure that cgroup usage is confirmed
+  - Ensure that the container is restricted from acquiring
+  - Ensure that container health is checked at runtime
+  - Ensure that Docker commands always make use of the
+  - Ensure that the PIDs cgroup limit is used
+  - Ensure that Docker's default bridge "docker0" is not used
+  - Ensure that the host's user namespaces are not shared
+  - Ensure that the Docker socket is not mounted inside any
+element46:
+  name: Default seccomp Profile
+  requirements:
+  - Ensure the default seccomp profile is not Disabled
+element47:
+  name: Docker Exec Command Restrictions
+  requirements:
+  - Ensure that docker exec commands are not used with the
+  - Ensure that cgroup usage is confirmed
+  - Ensure that Docker's default bridge "docker0" is not used
+element48:
+  name: Docker Socket Mounting
+  requirements:
+  - Ensure that the host's user namespaces are not shared
+element49:
+  name: Minimum Manager Node Count
+  requirements:
+  - Ensure that the minimum number of manager nodes have
+element50:
+  name: Swarm Services Binding
+  requirements:
+  - Ensure that swarm services are bound to a specific host

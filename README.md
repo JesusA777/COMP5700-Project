@@ -84,7 +84,7 @@ pip install -r requirements.txt
 ### 4. Log in to Hugging Face (needed once, to download Gemma)
 
 ```bash
-huggingface-cli login
+hf auth login
 ```
 
 Paste an access token from https://huggingface.co/settings/tokens (read access is enough). The model downloads on the first run.
