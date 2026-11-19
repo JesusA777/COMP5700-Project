@@ -16,4 +16,5 @@ dist/
 # Input data (not stored in the repo)
 *.pdf
 dockerfiles/
+dockerfiles-dataset/
 dockerfiles.zip
