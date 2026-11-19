@@ -5,7 +5,7 @@
 | Name | BannerID | Auburn email |
 |---|---|---|
 | TODO | TODO | TODO@auburn.edu |
-| TODO | TODO | TODO@auburn.edu |
+| Miles Lagman | 904321734 | rsl0024@auburn.edu |
 | TODO | TODO | TODO@auburn.edu |
 
 ## LLM used
