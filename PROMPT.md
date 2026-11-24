@@ -1,8 +1,9 @@
 # Prompts
 
 These are the prompts used with **Gemma-3-1B** (`google/gemma-3-1b-it`) in `extractor.py`.
-`{document_text}` is replaced with a chunk of the CIS benchmark (its recommendation lines,
-e.g. `4.1 Ensure that a user for the container has been created`).
+`{document_text}` is replaced with a chunk of the CIS benchmark (its recommendation titles,
+e.g. `Ensure that a user for the container has been created`).
+Titles that no prompt covered are sent once more, one at a time, with the few-shot prompt.
 
 ## zero-shot
 
@@ -34,11 +35,11 @@ A key data element is a configuration item, component or setting that the requir
 One key data element can map to several requirements.
 
 Example document:
-4.1 Ensure that a user for the container has been created
-4.6 Ensure that HEALTHCHECK instructions have been added to container images
-4.9 Ensure that COPY is used instead of ADD in Dockerfiles
-5.4 Ensure that privileged containers are not used
-5.25 Ensure that the container is restricted from acquiring additional privileges
+Ensure that a user for the container has been created
+Ensure that HEALTHCHECK instructions have been added to container images
+Ensure that COPY is used instead of ADD in Dockerfiles
+Ensure that privileged containers are not used
+Ensure that the container is restricted from acquiring additional privileges
 
 Example answer:
 element1:
