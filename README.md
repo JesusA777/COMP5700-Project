@@ -6,7 +6,7 @@
 |---|---|---|
 | TODO | TODO | TODO@auburn.edu |
 | Miles Lagman | 904321734 | rsl0024@auburn.edu |
-| TODO | TODO | TODO@auburn.edu |
+| Brian Venson | 904398689 | bdv0008@auburn.edu |
 
 ## LLM used
 
