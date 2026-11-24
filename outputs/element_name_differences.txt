@@ -1,0 +1,9 @@
+docker.socket
+Docker default auditing configuration
+Docker daemon auditing configuration
+Containerd auditing configuration
+Docker Configuration Settings
+docker.sock
+Docker sock auditing
+Docker file auditing
+Docker Audit Configuration
