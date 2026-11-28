@@ -110,6 +110,8 @@ python main.py docker-cis-v0.pdf docker-cis-v1.pdf
 
 Results are written to `outputs/`.
 
+**Run time:** Task 1 makes at least 54 Gemma calls per PDF. On a laptop CPU this takes about an hour per PDF (v0 took about 63 minutes), so one input pair can take around two hours. With an NVIDIA GPU it is much faster. Tasks 2 and 3 take seconds.
+
 ## Building and running the binary
 
 ```bash
