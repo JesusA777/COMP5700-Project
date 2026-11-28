@@ -4,7 +4,7 @@
 
 | Name | BannerID | Auburn email |
 |---|---|---|
-| TODO | TODO | TODO@auburn.edu |
+| Jesus Valdivia | 904219065 | jav0039@auburn.edu |
 | Miles Lagman | 904321734 | rsl0024@auburn.edu |
 | Brian Venson | 904398689 | bdv0008@auburn.edu |
 
