@@ -1,0 +1,46 @@
+docker.socket,Ensure auditing is configured for Docker files and directories - docker.socket
+auditing configuration,Ensure auditing is configured for Docker files and directories - docker.socket
+auditing configuration,Ensure auditing is configured for Docker files and directories - docker.sock
+Docker auditing configuration,Ensure auditing is configured for Docker files and directories - docker.socket
+Docker auditing configuration,Ensure auditing is configured for Docker files and directories - /etc/default/docker
+Docker auditing configuration,Ensure auditing is configured for Docker files and directories - /etc/docker/daemon.json
+Docker auditing configuration,Ensure auditing is configured for Docker files and directories - /etc/containerd/config.toml
+Docker auditing configuration,Ensure auditing is configured for Docker files and directories - /etc/sysconfig/docker
+Docker auditing configuration,Ensure auditing is configured for Docker files and directories - /usr/bin/containerd
+Docker auditing configuration,Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim
+Docker auditing configuration,Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim-runc-v1
+Docker default auditing configuration,Ensure auditing is configured for Docker files and directories - /etc/default/docker
+Docker default auditing configuration,Ensure auditing is configured for Docker files and directories - /etc/docker/daemon.json
+Docker daemon auditing configuration,Ensure auditing is configured for Docker files and directories - /etc/containerd/config.toml
+Docker daemon auditing configuration,Ensure auditing is configured for Docker files and directories - /usr/bin/containerd
+Docker daemon auditing configuration,Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim
+Docker daemon auditing configuration,Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim-runc-v1
+Containerd auditing configuration,Ensure auditing is configured for Docker files and directories - /etc/sysconfig/docker
+Containerd auditing configuration,Ensure auditing is configured for Docker files and directories - /usr/bin/containerd
+Containerd auditing configuration,Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim
+Containerd auditing configuration,Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim-runc-v1
+Docker Configuration Settings,Ensure auditing is configured for Docker files and directories - docker.socket
+Docker Configuration Settings,Ensure auditing is configured for Docker files and directories - /etc/default/docker
+Docker Configuration Settings,Ensure auditing is configured for Docker files and directories - /etc/docker/daemon.json
+Docker Configuration Settings,Ensure auditing is configured for Docker files and directories - /etc/containerd/config.toml
+Docker Configuration Settings,Ensure auditing is configured for Docker files and directories - /etc/sysconfig/docker
+Docker Configuration Settings,Ensure auditing is configured for Docker files and directories - /usr/bin/containerd
+Docker Configuration Settings,Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim
+Docker Configuration Settings,Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim-runc-v1
+docker.sock,Ensure auditing is configured for Docker files and directories - docker.sock
+Docker sock auditing,Ensure auditing is configured for Docker files and directories - docker.sock
+Docker file auditing,Ensure auditing is configured for Docker files and directories - /etc/default/docker
+Docker file auditing,Ensure auditing is configured for Docker files and directories - /etc/docker/daemon.json
+Docker file auditing,Ensure auditing is configured for Docker files and directories - /etc/containerd/config.toml
+Docker file auditing,Ensure auditing is configured for Docker files and directories - /etc/sysconfig/docker
+Docker file auditing,Ensure auditing is configured for Docker files and directories - /usr/bin/containerd
+Docker file auditing,Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim
+Docker file auditing,Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim-runc-v1
+Docker Audit Configuration,Ensure auditing is configured for Docker files and directories - docker.sock
+Docker Audit Configuration,Ensure auditing is configured for Docker files and directories - /etc/default/docker
+Docker Audit Configuration,Ensure auditing is configured for Docker files and directories - /etc/docker/daemon.json
+Docker Audit Configuration,Ensure auditing is configured for Docker files and directories - /etc/containerd/config.toml
+Docker Audit Configuration,Ensure auditing is configured for Docker files and directories - /etc/sysconfig/docker
+Docker Audit Configuration,Ensure auditing is configured for Docker files and directories - /usr/bin/containerd
+Docker Audit Configuration,Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim
+Docker Audit Configuration,Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim-runc-v1

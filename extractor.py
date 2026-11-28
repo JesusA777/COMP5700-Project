@@ -16,9 +16,12 @@ from pypdf import PdfReader
 
 logging.getLogger("pypdf").setLevel(logging.ERROR)  # the CIS PDFs trigger harmless xref warnings
 
+logger = logging.getLogger(__name__)
+
 MODEL_NAME = "google/gemma-3-1b-it"
 PROMPT_TYPES = ["zero-shot", "few-shot", "chain-of-thought"]
-MAX_CHUNK_CHARS = 2000  # small chunks keep the 1B model focused
+MAX_CHUNK_CHARS = 2000  # chunk size for documents without CIS recommendation titles
+MAX_CHUNK_TITLES = 8    # the 1B model skips titles or loops when it gets longer lists
 MAX_NEW_TOKENS = 1024
 
 OUTPUT_FORMAT = """element1:
@@ -46,11 +49,11 @@ A key data element is a configuration item, component or setting that the requir
 One key data element can map to several requirements.
 
 Example document:
-4.1 Ensure that a user for the container has been created
-4.6 Ensure that HEALTHCHECK instructions have been added to container images
-4.9 Ensure that COPY is used instead of ADD in Dockerfiles
-5.4 Ensure that privileged containers are not used
-5.25 Ensure that the container is restricted from acquiring additional privileges
+Ensure that a user for the container has been created
+Ensure that HEALTHCHECK instructions have been added to container images
+Ensure that COPY is used instead of ADD in Dockerfiles
+Ensure that privileged containers are not used
+Ensure that the container is restricted from acquiring additional privileges
 
 Example answer:
 element1:
@@ -92,8 +95,13 @@ After your reasoning, write the final YAML after a line that says FINAL ANSWER:
 Document:
 {document_text}"""
 
-# A CIS recommendation title looks like "4.1 Ensure that a user for the container has been created".
-REQUIREMENT_LINE = re.compile(r"^\s*\d+(\.\d+)+\s+(Ensure|Do not|Avoid|Use|Enable|Restrict|Verify|Configure|Set)\b", re.IGNORECASE)
+# A CIS recommendation is "4.1 Ensure that a user for the container has been created (Manual)".
+# It can wrap over several lines. CIS Controls ("16.7 Use Standard ...") have no (Manual)/(Automated).
+NUMBERED_LINE = re.compile(r"^(\d+(?:\.\d+)+)\s+\S")
+ASSESSMENT = re.compile(r"\s*\((?:Manual|Automated)\)")
+MAX_TITLE_LINES = 5
+# Used only for documents that have no (Manual)/(Automated) marks.
+REQUIREMENT_LINE = re.compile(r"^\s*\d+(\.\d+)+\s+(Ensure|Do not|Avoid|Use|Enable|Restrict|Verify|Configure|Set|Run)\b", re.IGNORECASE)
 
 _generator = None
 
@@ -180,27 +188,20 @@ def extract_kdes(document_text, document_name, output_dir="outputs", prompt_type
 
     merged = {}  # lower-case name -> {"name": ..., "requirements": [...]}
     records = []
+    chunks = _chunk_text(document_text)
     for prompt_type in prompt_types:
-        for chunk in _chunk_text(document_text):
-            prompt = PROMPT_BUILDERS[prompt_type](chunk)
-            output = generator(prompt)
-            records.append({
-                "llm_name": MODEL_NAME,
-                "prompt": prompt,
-                "prompt_type": prompt_type,
-                "output": output,
-            })
-            titles = _titles_in_chunk(chunk)
-            for element in _parse_llm_output(output):
-                requirements = [_match_title(r, titles) for r in element["requirements"]] if titles else element["requirements"]
-                requirements = [r for r in requirements if r]
-                if not requirements:
-                    continue
-                key = element["name"].lower()
-                entry = merged.setdefault(key, {"name": element["name"], "requirements": []})
-                for requirement in requirements:
-                    if requirement not in entry["requirements"]:
-                        entry["requirements"].append(requirement)
+        for chunk, titles in chunks:
+            _extract_chunk(chunk, titles, prompt_type, generator, merged, records)
+
+    # Ask again, one title at a time, about the titles the model left out.
+    retry_type = "few-shot" if "few-shot" in prompt_types else prompt_types[0]
+    all_titles = list(dict.fromkeys(title for _, titles in chunks for title in titles))
+    for title in _missing_titles(all_titles, merged):
+        _extract_chunk(title, [title], retry_type, generator, merged, records)
+    missing = _missing_titles(all_titles, merged)
+    if missing:
+        logger.warning("%s: no key data element found for %d of %d requirements: %s",
+                       document_name, len(missing), len(all_titles), "; ".join(missing))
 
     kdes = {f"element{i}": entry for i, entry in enumerate(merged.values(), start=1)}
     os.makedirs(output_dir, exist_ok=True)
@@ -210,55 +211,145 @@ def extract_kdes(document_text, document_name, output_dir="outputs", prompt_type
     return kdes, records
 
 
+def _extract_chunk(chunk, titles, prompt_type, generator, merged, records):
+    """Run one prompt, add its record to `records` and its KDEs to `merged`."""
+    prompt = PROMPT_BUILDERS[prompt_type](chunk)
+    output = generator(prompt)
+    records.append({
+        "llm_name": MODEL_NAME,
+        "prompt": prompt,
+        "prompt_type": prompt_type,
+        "output": output,
+    })
+    for element in _parse_llm_output(output):
+        requirements = element["requirements"]
+        if titles:
+            requirements = [_match_title(r, titles, element["name"]) for r in requirements]
+        requirements = [r for r in requirements if r]
+        if not requirements:
+            continue
+        key = element["name"].lower()
+        entry = merged.setdefault(key, {"name": element["name"], "requirements": []})
+        for requirement in requirements:
+            if requirement not in entry["requirements"]:
+                entry["requirements"].append(requirement)
+
+
+def _missing_titles(titles, merged):
+    found = {requirement for entry in merged.values() for requirement in entry["requirements"]}
+    return [title for title in titles if title not in found]
+
+
 def _clean_requirement_line(line):
     """Strip table-of-contents dots/page numbers, (Manual)/(Automated), checklist marks."""
     line = re.sub(r"[^\x20-\x7e]", " ", line)       # odd PDF symbols
     line = re.sub(r"\s*\.{2,}.*$", "", line)          # "....... 15"
     line = re.sub(r"(\s*\.)+\s*\d*\s*$", "", line)    # ". 120" (spaced dots + page number)
-    line = re.sub(r"\((Manual|Automated)\)", "", line)
+    line = ASSESSMENT.sub("", line)
     line = re.sub(r"(\s+o)+\s*$", "", line)           # checklist boxes "o o"
     return re.sub(r"\s+", " ", line).strip()
 
 
-def _chunk_text(document_text):
-    """Keep only CIS recommendation lines if there are any, then split into model-sized chunks."""
+def _join_wrapped_title(lines, start):
+    """Return the title starting at lines[start], up to (Manual)/(Automated), or None if it isn't a recommendation."""
+    title = lines[start]
+    for line in lines[start + 1:start + MAX_TITLE_LINES]:
+        if ASSESSMENT.search(title) or NUMBERED_LINE.match(line):
+            break
+        # "containerd-shim-" + "runc-v1" is one word, "directories -" + "/etc/docker" is not
+        title += ("" if re.search(r"\w-$", title) else " ") + line
+    if not ASSESSMENT.search(title):
+        return None
+    return _clean_requirement_line(ASSESSMENT.split(title)[0])
+
+
+def _find_titles(document_text):
+    """Return {section number: title} for the CIS recommendations in the document, in document order."""
     lines = [line.strip() for line in document_text.splitlines() if line.strip()]
-    titles = {}  # section number -> longest (most complete) title
-    for line in lines:
-        if REQUIREMENT_LINE.match(line):
-            line = _clean_requirement_line(line)
-            number = line.split()[0]
-            if len(line) > len(titles.get(number, "")):
-                titles[number] = line
-    if titles:
-        lines = list(titles.values())
+    found = {}
+    for i, line in enumerate(lines):
+        match = NUMBERED_LINE.match(line)
+        title = _join_wrapped_title(lines, i) if match else None
+        if title:
+            found.setdefault(match.group(1), SECTION_NUMBER.sub("", title))
+    if not found:  # no (Manual)/(Automated) marks: use single lines, keep the longest per section number
+        for line in lines:
+            if REQUIREMENT_LINE.match(line):
+                line = _clean_requirement_line(line)
+                number, title = line.split()[0], SECTION_NUMBER.sub("", line)
+                if len(title) > len(found.get(number, "")):
+                    found[number] = title
+    return found
+
+
+def _chunk_text(document_text):
+    """Split the document into model-sized (chunk, titles) pairs.
+
+    If there are CIS recommendations, a chunk is a list of titles from one top-level
+    section, so a change in one section does not change the prompts of the others.
+    Section numbers are left out: the model tends to answer with them instead of the titles.
+    """
+    found = _find_titles(document_text)
+    if found:
+        sections = {}
+        for number, title in found.items():
+            sections.setdefault(number.split(".")[0], []).append(title)
+        chunks = []
+        for titles in sections.values():
+            for i in range(0, len(titles), MAX_CHUNK_TITLES):
+                part = titles[i:i + MAX_CHUNK_TITLES]
+                chunks.append(("\n".join(part) + "\n", part))
+        return chunks
+
     chunks, current = [], ""
-    for line in lines:
+    for line in (line.strip() for line in document_text.splitlines() if line.strip()):
         if current and len(current) + len(line) + 1 > MAX_CHUNK_CHARS:
-            chunks.append(current)
+            chunks.append((current, []))
             current = ""
         current += line + "\n"
     if current:
-        chunks.append(current)
+        chunks.append((current, []))
     return chunks
 
 
 SECTION_NUMBER = re.compile(r"^\s*\d+(\.\d+)*\.?\s*")
+MATCH_CUTOFF = 0.8
+SINGLE_TITLE_CUTOFF = 0.6  # looser when only one title was asked about, as it can't be mistaken for another
+MATCH_MARGIN = 0.02  # how much better than the second-best title a fuzzy match must be
 
 
-def _titles_in_chunk(chunk):
-    """Recommendation titles in a chunk, without their section numbers."""
-    return [SECTION_NUMBER.sub("", line) for line in chunk.splitlines() if REQUIREMENT_LINE.match(line)]
+def _specifics(text):
+    """Values in a requirement that must not differ, such as 644, root:root, /etc/docker or docker.sock."""
+    words = (word.strip(".-") for word in re.findall(r"[\w./:=-]+", text.lower()))
+    return {word for word in words if re.search(r"[\d/:=]|\w\.\w", word)}
 
 
-def _match_title(requirement, titles):
+def _match_title(requirement, titles, element_name=""):
     """Map a requirement from the LLM to the closest real title in the chunk, or None if it isn't one."""
-    requirement = SECTION_NUMBER.sub("", requirement).strip()
+    requirement = SECTION_NUMBER.sub("", requirement).strip().rstrip(".").lower()
     if not requirement:
         return None
-    lowered = [t.lower() for t in titles]
-    match = difflib.get_close_matches(requirement.lower(), lowered, n=1, cutoff=0.8)
-    return titles[lowered.index(match[0])] if match else None
+    for title in titles:
+        if title.lower() == requirement:
+            return title
+
+    # A shared beginning ("Ensure auditing is configured for Docker files and directories") fits
+    # several titles: only the element name ("docker.sock") can tell which one is meant.
+    same_start = [title for title in titles if title.lower().startswith(requirement)]
+    if len(same_start) > 1:
+        named = [title for title in same_start if title.lower().endswith(" " + element_name.lower())]
+        return named[0] if len(named) == 1 else None
+
+    scored = sorted(((difflib.SequenceMatcher(None, title.lower(), requirement).ratio(), title) for title in titles),
+                    reverse=True)
+    cutoff = SINGLE_TITLE_CUTOFF if len(titles) == 1 else MATCH_CUTOFF
+    if not scored or scored[0][0] < cutoff:
+        return None
+    if len(scored) > 1 and scored[0][0] - scored[1][0] < MATCH_MARGIN:
+        return None  # several titles fit equally well
+    if not _specifics(requirement) <= _specifics(scored[0][1]):
+        return None  # a different value, such as 644 instead of 660
+    return scored[0][1]
 
 
 def _parse_llm_output(output):

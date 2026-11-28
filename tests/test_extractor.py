@@ -103,6 +103,58 @@ def test_extract_kdes(tmp_path):
     assert yaml_path.exists()
     assert yaml.safe_load(yaml_path.read_text()) == kdes
 
+    # Titles that wrap in the PDF are joined; page numbers and CIS Controls are left out.
+    document = (
+        "1.1.16 Ensure auditing is configured for /usr/bin/containerd-shim-\n"
+        "runc-v1 (Automated) ......... 45\n"
+        "2.1 Run the Docker daemon as a non-root user, if possible (Manual) ......... 57\n"
+        "3.16 Ensure that the Docker socket file permissions are set to 660\n"
+        "or more restrictively (Automated)\n"
+        "Profile Applicability:\n"
+        "16.7 Use Standard Hardening Configuration Templates for\n"
+        "Application Infrastructure\n"
+    )
+    audit_title = "Ensure auditing is configured for /usr/bin/containerd-shim-runc-v1"
+    run_title = "Run the Docker daemon as a non-root user, if possible"
+    socket_title = "Ensure that the Docker socket file permissions are set to 660 or more restrictively"
+    prompts = []
+
+    def forgetful_gemma(prompt):
+        """Answers with section numbers the first time, except about the Docker socket."""
+        prompts.append(prompt)
+        if socket_title in prompt:
+            return f"element1:\n  name: docker socket\n  requirements:\n    - {socket_title}."
+        if len(prompts) > 9:  # asked again about the titles it left out
+            name, title = ("auditing", audit_title) if audit_title in prompt else ("docker daemon", run_title)
+            answer = title.replace("the Docker daemon", "Docker").replace(", if possible", "")  # reworded
+            return f"element1:\n  name: {name}\n  requirements:\n    - {answer}"
+        return "element1:\n  name: junk\n  requirements:\n    - 2.1\n    - 16.7"
+
+    kdes, records = extractor.extract_kdes(document, "wrapped", str(tmp_path), generator=forgetful_gemma)
+
+    assert {e["name"]: e["requirements"] for e in kdes.values()} == {
+        "docker socket": [socket_title], "auditing": [audit_title], "docker daemon": [run_title]}
+    assert len(records) == len(prompts) == 3 * 3 + 2  # 3 sections x 3 prompts, then the 2 titles left out
+    assert records[-1]["prompt_type"] == "few-shot"
+    assert not any("Application Infrastructure" in p or "16.7" in p or "......" in p for p in prompts)
+
+    # A requirement is only matched to a title if it is clear which title is meant.
+    start = "Ensure auditing is configured for Docker files and directories"
+    document = (f"1.1.1 {start} - docker.sock (Automated)\n"
+                f"1.1.2 {start} - /etc/docker (Automated)\n"
+                "1.1.3 Ensure that the socket file permissions are set to 660 (Automated)\n")
+
+    def vague_gemma(prompt):
+        if "docker.sock" not in prompt:  # asked again about a title it left out
+            return ""
+        return (f"element1:\n  name: docker.sock\n  requirements:\n    - {start}\n"
+                f"element2:\n  name: docker files\n  requirements:\n    - {start}\n"                             # which one?
+                "element3:\n  name: socket\n  requirements:\n    - Ensure that the socket file permissions are set to 644")  # wrong value
+
+    kdes, _ = extractor.extract_kdes(document, "vague", str(tmp_path), generator=vague_gemma)
+    assert kdes["element1"] == {"name": "docker.sock", "requirements": [start + " - docker.sock"]}
+    assert not any("660" in r for e in kdes.values() for r in e["requirements"])
+
 
 def test_dump_llm_outputs(tmp_path):
     records = [{"llm_name": extractor.MODEL_NAME, "prompt": "PROMPT TEXT",
